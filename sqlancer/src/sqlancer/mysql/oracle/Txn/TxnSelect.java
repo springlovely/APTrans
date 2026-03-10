@@ -1,18 +1,26 @@
 package sqlancer.mysql.oracle.Txn;
 
+<<<<<<< HEAD
 import org.apache.commons.lang3.tuple.Pair;
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+=======
+import java.util.List;
+import java.util.ArrayList;
+>>>>>>> e2d898d (添加APTrans核心代码)
 
 import sqlancer.Randomly;
 import sqlancer.mysql.MySQLGlobalState;
 import sqlancer.mysql.MySQLSchema;
+<<<<<<< HEAD
 import sqlancer.mysql.MySQLSchema.MySQLTables;
 import sqlancer.mysql.MySQLSchema.MySQLTable;
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
 
 public class TxnSelect {
     private String selectSql;

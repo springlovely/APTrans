@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+<<<<<<< HEAD
 import sqlancer.MainOptions;
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
 // Txn_constant.java
 public class Txn_constant {
     static MainOptions options = new MainOptions();

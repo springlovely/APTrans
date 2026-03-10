@@ -1,0 +1,3 @@
+Tables Num: 1
+Table 0: tI7IjMJv
+Create SQL 0: CREATE TABLE tI7IjMJv (ID INT, VAL INT, c0 DECIMAL(49, 9)  PRIMARY KEY  NOT NULL, c1 TEXT  , c2 TEXT );

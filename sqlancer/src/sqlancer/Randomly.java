@@ -454,6 +454,13 @@ public final class Randomly {
         return getThreadRandom().get().nextInt(10) == 1;
     }
 
+<<<<<<< HEAD
+=======
+    public static boolean getBooleanSomeProbability() { // 10% 概率真
+        return getThreadRandom().get().nextInt(3) == 1;
+    }
+
+>>>>>>> e2d898d (添加APTrans核心代码)
     public static boolean getBooleanWithSmallProbability() {
         return smallBiasProbability();
     }

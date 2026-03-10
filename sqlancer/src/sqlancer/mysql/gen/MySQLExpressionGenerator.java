@@ -3,6 +3,10 @@ package sqlancer.mysql.gen;
 import java.util.ArrayList;
 import java.util.List;
 // import java.util.Random;
+<<<<<<< HEAD
+=======
+import java.util.Random;
+>>>>>>> e2d898d (添加APTrans核心代码)
 
 // import sqlancer.IgnoreMeException;
 import sqlancer.Randomly;
@@ -61,9 +65,15 @@ public class MySQLExpressionGenerator extends UntypedExpressionGenerator<MySQLEx
 
     @Override
     public MySQLExpression generateExpression(int depth) {
+<<<<<<< HEAD
 //        if (depth >= state.getOptions().getMaxExpressionDepth()) {
 //            return generateLeafNode();
 //        }
+=======
+       if (depth >= state.getOptions().getMaxExpressionDepth()) {
+           return generateLeafNode();
+       }
+>>>>>>> e2d898d (添加APTrans核心代码)
         switch (Randomly.fromOptions(Actions.values())) {
         case COLUMN:
             return generateColumn();
@@ -132,17 +142,49 @@ public class MySQLExpressionGenerator extends UntypedExpressionGenerator<MySQLEx
         return result;
     }
 
+<<<<<<< HEAD
     public MySQLExpression generateExpression(int depth, ExpressionType type) {
 //        if (depth >= state.getOptions().getMaxExpressionDepth()){
 //            return generateConstant(type);
 //        }
 
         if (Randomly.getBooleanWithSmallProbability()) {
+=======
+    public MySQLExpression generateColumn(ExpressionType type) {
+        MySQLColumn c = FindColumn(type);
+        if (c != null){
+            MySQLConstant val = null;
+            return MySQLColumnReference.create(c, val);
+        } 
+        else {
+            return generateConstant(type);
+        }
+    }
+
+    public MySQLExpression generateLeafNode(ExpressionType type) {
+        if (Randomly.getBoolean() && !columns.isEmpty()) {
+            return generateColumn(type);
+        } else {
+            return generateConstant(type);
+        }
+    }
+
+    public MySQLExpression generateExpression(int depth, ExpressionType type) {
+       if (depth >= state.getOptions().getMaxExpressionDepth()){
+            return generateLeafNode(type);
+       }
+
+        if (Randomly.getBooleanSomeProbability()) {
+>>>>>>> e2d898d (添加APTrans核心代码)
             MySQLColumn c = FindColumn(type);
             if (c != null){
                 MySQLConstant val = null;
                 return MySQLColumnReference.create(c, val);
+<<<<<<< HEAD
             }
+=======
+            } 
+>>>>>>> e2d898d (添加APTrans核心代码)
         }
 
         Actions action;

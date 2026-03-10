@@ -2,6 +2,7 @@ package sqlancer.postgres.oracle.Txn;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -12,6 +13,12 @@ import sqlancer.postgres.PostgresSchema.PostgresTable;
 import sqlancer.postgres.PostgresSchema.PostgresTables;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
+=======
+
+import sqlancer.Randomly;
+import sqlancer.postgres.PostgresGlobalState;
+import sqlancer.postgres.PostgresSchema.PostgresColumn;
+>>>>>>> e2d898d (添加APTrans核心代码)
 
 public class TxnSelect {
     private String selectSql;

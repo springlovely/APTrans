@@ -1,0 +1,3 @@
+Tables Num: 1
+Table 0: tSrTEyVo
+Create SQL 0: CREATE TABLE tSrTEyVo (ID INT, VAL INT, c0 DOUBLE  PRIMARY KEY, c1 BIGINT  , c2 VARCHAR(100) );

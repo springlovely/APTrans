@@ -2,12 +2,24 @@ package sqlancer.mysql.oracle.Txn;
 
 import org.apache.commons.lang3.tuple.Pair;
 import sqlancer.Randomly;
+<<<<<<< HEAD
 import sqlancer.mysql.MySQLSchema;
 import sqlancer.mysql.MySQLSchema.MySQLColumn;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+=======
+import sqlancer.mysql.MySQLGlobalState;
+import sqlancer.mysql.gen.MySQLExpressionGenerator;
+import sqlancer.mysql.gen.MySQLExpressionGenerator.ExpressionType;
+import sqlancer.mysql.ast.MySQLExpression;
+import sqlancer.mysql.MySQLSchema.MySQLColumn;
+import sqlancer.mysql.MySQLVisitor;
+
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> e2d898d (添加APTrans核心代码)
 import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
@@ -22,6 +34,10 @@ public class Condition {
         And; 
     }
 
+<<<<<<< HEAD
+=======
+    private final MySQLGlobalState state;
+>>>>>>> e2d898d (添加APTrans核心代码)
     public List<TxnTable> allTables;
 //    public List<TxnTable> fromTables;
 //    List<Pair<String, Pair<String, String>>> joinTables;
@@ -40,24 +56,42 @@ public class Condition {
     public ConditionType conditionType;
     public String whereConditionString;
 
+<<<<<<< HEAD
 
     public Condition(List<TxnTable> tables, TxnTable table, MySQLColumn column, boolean isPredicate, String val, String table_column_name) {
+=======
+    public Condition(MySQLGlobalState state, List<TxnTable> tables, TxnTable table, MySQLColumn column, boolean isPredicate, String val, String table_column_name) {
+        this.state = state;
+>>>>>>> e2d898d (添加APTrans核心代码)
         this.allTables = tables;
         this.table = table;
         this.column = column;
         this.isPredicate = isPredicate;
         this.val = val;
         this.table_column_name = table_column_name;
+<<<<<<< HEAD
+=======
+        this.whereConditionString = "";
+>>>>>>> e2d898d (添加APTrans核心代码)
         if (isPredicate) {
             this.conditionType = Randomly.fromOptions(ConditionType.LessThan, ConditionType.GreaterThan);
         } else {
             this.conditionType = ConditionType.Equal;
         }
         generateJoinCondition();
+<<<<<<< HEAD
         generateWhereCondition();
     }
 
     public Condition(List<TxnTable> tables, TxnTable table, MySQLColumn column, boolean isPredicate, String left_val, String right_val, String table_column_name) {
+=======
+        generateExpression();
+        generateWhereCondition();
+    }
+
+    public Condition(MySQLGlobalState state, List<TxnTable> tables, TxnTable table, MySQLColumn column, boolean isPredicate, String left_val, String right_val, String table_column_name) {
+        this.state = state;
+>>>>>>> e2d898d (添加APTrans核心代码)
         this.allTables = tables;
         this.table = table;
         this.column = column;
@@ -66,7 +100,13 @@ public class Condition {
         this.right_val = right_val;
         this.conditionType = Randomly.fromOptions(ConditionType.Or, ConditionType.And);
         this.table_column_name = table_column_name;
+<<<<<<< HEAD
         generateJoinCondition();
+=======
+        this.whereConditionString = "";
+        generateJoinCondition();
+        generateExpression();
+>>>>>>> e2d898d (添加APTrans核心代码)
         generateWhereCondition();
     }
 
@@ -115,17 +155,29 @@ public class Condition {
 
     public void generateEqual() {
         this.op = "=";
+<<<<<<< HEAD
         this.whereConditionString = "( " + table_column_name + " " + this.op + " " + val + " )";
+=======
+        this.whereConditionString += "( " + table_column_name + " " + this.op + " " + val + " )";
+>>>>>>> e2d898d (添加APTrans核心代码)
     }
 
     public void generateLessThan() {
         this.op = Randomly.fromOptions("<", "<=");
+<<<<<<< HEAD
         this.whereConditionString = "( " + table_column_name + " " + this.op + " " + val + " )";
+=======
+        this.whereConditionString += "( " + table_column_name + " " + this.op + " " + val + " )";
+>>>>>>> e2d898d (添加APTrans核心代码)
     }
 
     public void generateGreaterThan() {
         this.op = Randomly.fromOptions(">", ">=");
+<<<<<<< HEAD
         this.whereConditionString = "( " + table_column_name + " " + this.op + " " + val + " )";
+=======
+        this.whereConditionString += "( " + table_column_name + " " + this.op + " " + val + " )";
+>>>>>>> e2d898d (添加APTrans核心代码)
     }
 
     public void generateAnd() {
@@ -139,11 +191,19 @@ public class Condition {
             left_op = temp;
         }
         
+<<<<<<< HEAD
         this.whereConditionString = "( " + table_column_name + " " + this.left_op + " " + left_val + " AND "
             + table_column_name + " " + this.right_op + " " + right_val + " )";
 
         if (this.left_op == ">=" && this.right_op == "<=" && Randomly.getBoolean()) {
             this.whereConditionString = "( " + table_column_name + " BETWEEN " + left_val + " AND " + right_val + " )";
+=======
+        this.whereConditionString += "( " + table_column_name + " " + this.left_op + " " + left_val + " AND "
+            + table_column_name + " " + this.right_op + " " + right_val + " )";
+
+        if (this.left_op == ">=" && this.right_op == "<=" && Randomly.getBoolean()) {
+            this.whereConditionString += "( " + table_column_name + " BETWEEN " + left_val + " AND " + right_val + " )";
+>>>>>>> e2d898d (添加APTrans核心代码)
         }
     }
 
@@ -151,7 +211,11 @@ public class Condition {
         this.op = "OR";
         this.left_op = Randomly.fromOptions(">", ">=");
         this.right_op = Randomly.fromOptions("<", "<=");
+<<<<<<< HEAD
         this.whereConditionString = "( " + table_column_name + " " + this.left_op + " " + left_val + " OR "
+=======
+        this.whereConditionString += "( " + table_column_name + " " + this.left_op + " " + left_val + " OR "
+>>>>>>> e2d898d (添加APTrans核心代码)
             + table_column_name + " " + this.right_op + " " + right_val + ")";
     }
 
@@ -227,4 +291,15 @@ public class Condition {
 
         this.allTables = AllTables;
     }
+<<<<<<< HEAD
+=======
+
+    public void generateExpression() {
+        MySQLExpressionGenerator generator = new MySQLExpressionGenerator(state);
+        generator.setColumns(table.getColumns());
+        MySQLExpression Expresion = generator.generateExpression(1, ExpressionType.BOOLEAN);
+        String expString = MySQLVisitor.asString(Expresion);
+        this.whereConditionString += expString + " OR ";
+    }
+>>>>>>> e2d898d (添加APTrans核心代码)
 }

@@ -23,11 +23,60 @@ public class MainOptions {
     private static String random_table_num = "false";
 
     @Parameter(names = "--txn_num", description = "the number of transactions to generate in each case")
+<<<<<<< HEAD
     private static int txn_num = 128;
+=======
+    private static int txn_num = 64;
+>>>>>>> e2d898d (添加APTrans核心代码)
  
     @Parameter(names = "--test_isolation", description = "the database isolation to test [serializable, repeatable_read, read_committed]")
     private static String test_isolation  = "serializable";
 
+<<<<<<< HEAD
+=======
+    @Parameter(names = "--only_generate_database", description = "whether to only generate database structure (without transactions, true/false)")
+    private static String only_generate_database = "false";
+
+    @Parameter(names = "--database_path", description = "database structure path")
+    private static String database_path = "./databases";
+
+    @Parameter(names = "--load_database", description = "whether to load existing database structure from save_path (true/false)")
+    private static String load_database = "false";
+
+    @Parameter(names = "--single_sql", description = "whether to generate only a single SQL statement (true/false)")
+    private static String single_sql = "false";
+
+    @Parameter(names = "--sqls_num", description = "the number of sqls to generate")
+    private static int sqls_num = 64;
+
+    @Parameter(names = "--depth", description = "the depth of expression")
+    private static int depth = 3;
+
+    public int getMaxExpressionDepth(){
+        return depth;
+    }
+
+    public static boolean isOnlySQL() {
+        return "true".equalsIgnoreCase(single_sql);
+    }
+
+    public int getSQLs_num() {
+        return sqls_num;
+    }
+
+    public static boolean isOnlyGenerateDatabase() {
+        return "true".equalsIgnoreCase(only_generate_database);
+    }
+
+    public static boolean isLoadDatabase() {
+        return "true".equalsIgnoreCase(load_database);
+    }
+
+    public String getDatabasePath() {
+        return database_path;
+    }
+
+>>>>>>> e2d898d (添加APTrans核心代码)
     public String getSample_type(){
         return sample_type;
     }

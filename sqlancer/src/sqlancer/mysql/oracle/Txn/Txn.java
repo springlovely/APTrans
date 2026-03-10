@@ -1,6 +1,7 @@
 package sqlancer.mysql.oracle.Txn;
 
 import java.util.*;
+<<<<<<< HEAD
 import java.util.stream.Collectors;
 
 import sqlancer.Randomly;
@@ -8,6 +9,10 @@ import sqlancer.mysql.MySQLGlobalState;
 import sqlancer.mysql.MySQLSchema;
 import sqlancer.mysql.MySQLSchema.MySQLTable;
 import sqlancer.mysql.ast.MySQLConstant;
+=======
+
+import sqlancer.mysql.MySQLGlobalState;
+>>>>>>> e2d898d (添加APTrans核心代码)
 import sqlancer.Txn_constant;
 
 public class Txn {
@@ -50,6 +55,19 @@ public class Txn {
         return ret;
     }
 
+<<<<<<< HEAD
+=======
+    public List<String> getSQLs(){
+        List<String> ret = new ArrayList<>();
+        for (int i = 1; i < sqlStatements.size() - 1; i++){
+            String formattedSql = sqlStatements.get(i).replaceAll("\\s+", " ").trim();
+            formattedSql = formattedSql.replaceAll(", INFO", "");
+            ret.add(formattedSql);
+        }
+        return ret;
+    }
+
+>>>>>>> e2d898d (添加APTrans核心代码)
     public void packageTxn(){
         String beString = "BEGIN;";
         if (Txn_constant.isolation_level != "READ COMMITTED"){

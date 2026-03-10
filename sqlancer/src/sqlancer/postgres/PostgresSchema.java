@@ -22,8 +22,11 @@ import sqlancer.common.schema.AbstractSchema;
 import sqlancer.common.schema.AbstractTableColumn;
 import sqlancer.common.schema.AbstractTables;
 import sqlancer.common.schema.TableIndex;
+<<<<<<< HEAD
 import sqlancer.mysql.ast.MySQLConstant;
 import sqlancer.mysql.ast.MySQLConstant.MySQLDoubleConstant;
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
 import sqlancer.postgres.PostgresSchema.PostgresTable;
 import sqlancer.postgres.PostgresSchema.PostgresTable.TableType;
 import sqlancer.postgres.ast.PostgresConstant;

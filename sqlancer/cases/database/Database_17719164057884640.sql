@@ -1,0 +1,3 @@
+Tables Num: 1
+Table 0: thfK9YC1
+Create SQL 0: CREATE TABLE thfK9YC1 (ID INT, VAL INT, c0 DOUBLE  UNIQUE KEY NULL , c1 BOOLEAN , c2 TEXT  );

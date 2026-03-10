@@ -2,7 +2,10 @@ package sqlancer.postgres.oracle.Txn;
 
 import org.apache.commons.lang3.tuple.Pair;
 import sqlancer.Randomly;
+<<<<<<< HEAD
 import sqlancer.mysql.MySQLSchema;
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
 import sqlancer.postgres.PostgresSchema.PostgresColumn;
 
 import java.util.ArrayList;

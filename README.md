@@ -46,6 +46,7 @@ Below is the list of transaction bugs identified during testing:
 | 12  | MariaDB    | MDEV-36358    | [MDEV-36358](https://jira.mariadb.org/browse/MDEV-36358?filter=-2)|
 | 13  | OceanBase  | #2248         | [#2248](https://github.com/oceanbase/oceanbase/issues/2248)        |
 
+<<<<<<< HEAD
 
 # Comparison of Transaction Execution Efficiency
 We have counted the number of transactions executed by each method within the same unit of time (1 hour), as shown in the table below:
@@ -67,3 +68,14 @@ APTrans generates two transactions per batch. Our transaction generation strateg
 
 
 
+=======
+mvn clean package
+
+java -jar ./target/sqlancer-2.0.0.jar --sample_type mysql --save_path ./cases/database/  --clean_save_path true --sample_num 5 --only_generate_database true
+
+java -jar ./target/sqlancer-2.0.0.jar --sample_type mysql --save_path ../cases/mysql/ --clean_save_path true --sample_num 5 --load_database true --database_path ./cases/database/
+
+java -jar ./target/sqlancer-2.0.0.jar --sample_type mysql --save_path ./cases/mysql/ --clean_save_path true --sample_num 1 --single_sql true --sqls_num 10
+
+java -jar ./target/sqlancer-2.0.0.jar --sample_type mysql --save_path ./cases/mysql/ --clean_save_path true --sample_num 1 --single_sql true --sqls_num 10 --load_database true --database_path ./cases/database/
+>>>>>>> e2d898d (添加APTrans核心代码)

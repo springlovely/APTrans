@@ -5,6 +5,11 @@ from enum import Enum
 
 class DBConfig:
     def __init__(self):
+<<<<<<< HEAD
+=======
+        self.Mysql_Config = ["set binlog_transaction_compression=ON;", "SET GLOBAL general_log=ON;"]
+        
+>>>>>>> e2d898d (添加APTrans核心代码)
         self.parser = argparse.ArgumentParser(description='Database configuration')
         self.parser.add_argument('--host', type=str, default='127.0.0.1', help='Database host')
         self.parser.add_argument('--user', type=str, default='root', help='Database user')

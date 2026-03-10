@@ -5,6 +5,10 @@ set -euo pipefail
 
 # Define the list of databases
 Test_Database=("mysql" "mariadb" "oceanbase")
+<<<<<<< HEAD
+=======
+# Test_Database=("mysql" "mariadb" "oceanbase" "opengauss" "postgres")
+>>>>>>> e2d898d (添加APTrans核心代码)
 # Test_Database=("tdsql")
 
 # Define the function to start a screen session

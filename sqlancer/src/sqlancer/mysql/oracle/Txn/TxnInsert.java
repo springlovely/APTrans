@@ -59,6 +59,12 @@ public class TxnInsert {
                             value = dataType.getRandomValue(state, column.isUnsigned);
                             val = value.getTextRepresentation().replaceAll("\\s+", " ");
                         }
+<<<<<<< HEAD
+=======
+                        if (Data.get(table_column_name) == null) {
+                            System.out.println("致命错误：列 " + table_column_name + " 未在 Data Map 中初始化！");
+                        }
+>>>>>>> e2d898d (添加APTrans核心代码)
                         if (Data.get(table_column_name).isEmpty() || !Data.get(table_column_name).contains(val)) {
 //                            Data.get(table_column_name).add(val);
                             values_list.add(val);

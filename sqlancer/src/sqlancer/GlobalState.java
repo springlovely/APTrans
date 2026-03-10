@@ -9,6 +9,7 @@ public abstract class GlobalState<O extends DBMSSpecificOptions<?>, S extends Ab
     private S schema;
 //    private StateToReproduce state;
     private String databaseName;
+<<<<<<< HEAD
 
 //    public void setConnection(C con) {
 //        this.databaseConnection = con;
@@ -16,6 +17,11 @@ public abstract class GlobalState<O extends DBMSSpecificOptions<?>, S extends Ab
 
     public C getConnection() {
 //        return databaseConnection;
+=======
+    private MainOptions options;
+
+    public C getConnection() {
+>>>>>>> e2d898d (添加APTrans核心代码)
         return null;
     }
 
@@ -23,6 +29,13 @@ public abstract class GlobalState<O extends DBMSSpecificOptions<?>, S extends Ab
         this.r = r;
     }
 
+<<<<<<< HEAD
+=======
+    public MainOptions getOptions() {
+        return options;
+    }
+
+>>>>>>> e2d898d (添加APTrans核心代码)
     public Randomly getRandomly() {
         return r;
     }
@@ -42,10 +55,21 @@ public abstract class GlobalState<O extends DBMSSpecificOptions<?>, S extends Ab
         return schema;
     }
 
+<<<<<<< HEAD
     protected void setSchema(S schema) {
         this.schema = schema;
     }
 
+=======
+    public void setSchema(S schema) {
+        this.schema = schema;
+    }
+
+    public void setMainOptions(MainOptions options) {
+        this.options = options;
+    }
+
+>>>>>>> e2d898d (添加APTrans核心代码)
     public void updateSchema() throws Exception {
         setSchema(readSchema());
         for (AbstractTable<?, ?, ?> table : schema.getDatabaseTables()) {

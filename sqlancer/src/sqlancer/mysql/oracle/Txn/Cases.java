@@ -17,8 +17,13 @@ public class Cases {
     private final MySQLGlobalState state;
     public List<TxnTable> tables;
     public List<List<String>> Data_Sql;
+<<<<<<< HEAD
     public static Map<String, List<String>> Data; 
     public List<Txns> all_cases; 
+=======
+    public Map<String, List<String>> Data;
+    public List<Txns> all_cases;
+>>>>>>> e2d898d (添加APTrans核心代码)
 
     public Cases(MySQLGlobalState globalState) {
         this.state = globalState;
@@ -32,7 +37,11 @@ public class Cases {
         this.case_num = case_num;
         this.all_cases = new ArrayList<>();
         this.Data_Sql = new ArrayList<>();
+<<<<<<< HEAD
         Data = new HashMap<>();
+=======
+        this.Data = new HashMap<>();
+>>>>>>> e2d898d (添加APTrans核心代码)
         Data_Map_Init();
     }
 
@@ -61,9 +70,29 @@ public class Cases {
         return sb.toString();
     }
 
+<<<<<<< HEAD
     public void generateCase(){
         for (int idx = 0; idx < case_num; idx++) {
             Data_Load_MultiTables();
+=======
+    public String getSQLs(int sql_nums) {
+        List<String> ret = new ArrayList<>();
+        for(int i = 0; i < all_cases.size(); i++) {
+            ret.addAll(all_cases.get(i).getSQLs());
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < sql_nums; i++) {
+            sb.append(ret.get(i) + "\n");
+        }
+        return sb.toString();
+    } 
+
+    public void generateCase(){
+        for (int idx = 0; idx < case_num; idx++) {
+            Data_Load_MultiTables();
+
+>>>>>>> e2d898d (添加APTrans核心代码)
             Txns txns = new Txns(state);
             txns.genPattern();
             List<Condition> fetch_set = new ArrayList<>();
@@ -72,14 +101,39 @@ public class Cases {
                 fetch_set.add(fetch_tmp);
             }
             txns.setFetchSet(fetch_set);
+<<<<<<< HEAD
             // txns.genTxns(Data);
             // txns.genSchedule();
             txns.genRandomTxn(Data);
+=======
+            txns.genTxns(Data);
+            txns.genSchedule();
+            // txns.genRandomTxn(this.Data);
+            // txns.genRandomSchedule();
+            all_cases.add(txns);
+        }
+    }
+
+    public void generateSQL(){
+        for (int idx = 0; idx < case_num; idx++) {
+            Data_Load_MultiTables();
+
+            Txns txns = new Txns(state);
+            txns.genPattern();
+            List<Condition> fetch_set = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                Condition fetch_tmp = Gen_Fetch_Exp_MultiTables(Txn_constant.isPredicate(txns.Txn_Pattern));
+                fetch_set.add(fetch_tmp);
+            }
+            txns.setFetchSet(fetch_set);
+            txns.genRandomTxn(this.Data);
+>>>>>>> e2d898d (添加APTrans核心代码)
             txns.genRandomSchedule();
             all_cases.add(txns);
         }
     }
 
+<<<<<<< HEAD
     public void Data_Map_Init(){
         for (TxnTable table: tables) {
             List<MySQLColumn> columns = table.getColumns();
@@ -88,12 +142,25 @@ public class Cases {
                 MySQLColumn column = columns.get(i);
                 String column_name = column.getName();
                 Data.put(table_name + "." + column_name, new ArrayList<>());
+=======
+    // 在 Data_Map_Init 内部使用 putIfAbsent
+    public void Data_Map_Init(){
+        for (TxnTable table: tables) {
+            for (MySQLColumn column : table.getColumns()) {
+                String key = table.getTableName() + "." + column.getName();
+                // 只有当 key 不存在时才放进去，防止多线程互相覆盖已经初始化的列表
+                this.Data.putIfAbsent(key, Collections.synchronizedList(new ArrayList<>()));
+>>>>>>> e2d898d (添加APTrans核心代码)
             }
         }
     }
 
     public void Data_Load_MultiTables(){
+<<<<<<< HEAD
         int Insert_Cnt = new Random().nextInt(3) + 2; 
+=======
+        int Insert_Cnt = new Random().nextInt(1) + 2; 
+>>>>>>> e2d898d (添加APTrans核心代码)
         try{
             for (TxnTable table: tables) { 
                 List<String> Load_Sqls = new ArrayList<>();
@@ -202,7 +269,11 @@ public class Cases {
                     }
                     if (max_tries == 0)
                         right_exp = false;
+<<<<<<< HEAD
                     condition = new Condition(tables, table, column, isPredicate, val, table_column_name);
+=======
+                    condition = new Condition(state, tables, table, column, isPredicate, val, table_column_name);
+>>>>>>> e2d898d (添加APTrans核心代码)
                 }
                 else {
                     int row_idx1 = RandomRow(Data.get(table_column_name).size());
@@ -227,7 +298,11 @@ public class Cases {
                     }
                     if (max_tries == 0 || val1 == val2)
                         right_exp = false;
+<<<<<<< HEAD
                     condition = new Condition(tables, table, column, isPredicate, val1, val2, table_column_name);
+=======
+                    condition = new Condition(state, tables, table, column, isPredicate, val1, val2, table_column_name);
+>>>>>>> e2d898d (添加APTrans核心代码)
                 }
                 total_tries--;
             } while (!right_exp && total_tries > 1);

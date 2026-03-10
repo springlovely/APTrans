@@ -24,7 +24,10 @@ public class TxnUpdate {
     public String parseUpdateStatement(Condition condition) {
         MySQLSchema.MySQLTable table = condition.getFetchTable().getMySQLTable();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
         Map<String, String> update_data = new HashMap<>();
         List<String> update_columns = new ArrayList<>();
         for (MySQLSchema.MySQLColumn column: table.getColumns()){
@@ -75,4 +78,9 @@ public class TxnUpdate {
         sb.append(";");
         return sb.toString();
     }
+<<<<<<< HEAD
+=======
+
+    
+>>>>>>> e2d898d (添加APTrans核心代码)
 }

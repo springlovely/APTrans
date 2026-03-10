@@ -32,7 +32,10 @@ public class MySQLBinaryComparisonOperation implements MySQLExpression {
             }
         },
         LESS_EQUALS("<=") {
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
             @Override
             public MySQLConstant getExpectedValue(MySQLConstant leftVal, MySQLConstant rightVal) {
                 MySQLConstant lessThan = leftVal.isLessThan(rightVal);

@@ -1,11 +1,16 @@
 package sqlancer.mysql.oracle.Txn;
 
 import java.util.*;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Random;
 
 import sqlancer.mysql.MySQLGlobalState;
 import sqlancer.mysql.MySQLSchema.MySQLTable;
+=======
+
+import sqlancer.mysql.MySQLGlobalState;
+>>>>>>> e2d898d (添加APTrans核心代码)
 import sqlancer.Txn_constant;
 import sqlancer.Randomly;
 
@@ -38,7 +43,11 @@ public class Txns {
     public void setFetchSet(List<Condition> fetch_exps) {
         this.fetch_exps = fetch_exps;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> e2d898d (添加APTrans核心代码)
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -57,6 +66,17 @@ public class Txns {
         return ret;
     }
 
+<<<<<<< HEAD
+=======
+    public List<String> getSQLs() {
+        List<String> ret = new ArrayList<>();
+        for (Txn txn : transactions) {
+            ret.addAll(txn.getSQLs());
+        }
+        return ret;
+    }
+
+>>>>>>> e2d898d (添加APTrans核心代码)
     public void genTxns(Map<String, List<String>> data) {
         switch (Txn_var_num) {
             case 1:
@@ -73,7 +93,10 @@ public class Txns {
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
     public void genRandomTxn(Map<String, List<String>> data) {
         // 创建两个事务对象
         Txn txn1 = new Txn(state, data); // 事务1
@@ -250,8 +273,12 @@ public class Txns {
         }
         Schedule = String.join(",", strList);
     }
+<<<<<<< HEAD
 
     
+=======
+   
+>>>>>>> e2d898d (添加APTrans核心代码)
     public void genPattern(){
         // DO: Get random Pattern
         int random = new Random().nextInt(6);

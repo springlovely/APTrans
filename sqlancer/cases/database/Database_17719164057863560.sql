@@ -1,0 +1,3 @@
+Tables Num: 1
+Table 0: t6Z5G8HP
+Create SQL 0: CREATE TABLE t6Z5G8HP (ID INT, VAL INT, c0 BOOLEAN , c1 BOOLEAN , c2 TEXT );

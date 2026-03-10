@@ -17,7 +17,11 @@ public class TxnTable {
     private List<MySQLColumn> columns;
     private MySQLColumn primaryKey;
     private String createSql;
+<<<<<<< HEAD
     private final boolean allowPrimaryKey;
+=======
+    private boolean allowPrimaryKey;
+>>>>>>> e2d898d (添加APTrans核心代码)
     private boolean setPrimaryKey;
     private boolean setUniqueKey;
     private final StringBuilder sb = new StringBuilder();
@@ -37,6 +41,130 @@ public class TxnTable {
         genRandomTable();
     }
 
+<<<<<<< HEAD
+=======
+    public void setTableName(String tableName){
+        this.tableName = tableName;
+    }
+
+    public void setCreateSql(String createSql){
+        this.createSql = createSql;
+        this.columns = new ArrayList<>();
+        this.create_sql_parse();
+    }
+
+    public void create_sql_parse() {
+        // 1. 提取括号内的列定义部分
+        java.util.regex.Pattern columnDefPattern = java.util.regex.Pattern.compile("CREATE TABLE \\w+ \\((.+)\\);", java.util.regex.Pattern.DOTALL);
+        java.util.regex.Matcher matcher = columnDefPattern.matcher(createSql);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("无法解析CREATE TABLE语句: " + createSql);
+        }
+    
+        String columnDefs = matcher.group(1);
+        // 使用零宽断言分割逗号，防止误伤 VARCHAR(10,2) 中的逗号
+        String[] columnParts = columnDefs.split(",(?![^()]*\\))");
+    
+        for (String part : columnParts) {
+            part = part.trim();
+            // 跳过约束行
+            if (part.startsWith("FOREIGN KEY") || part.startsWith("PRIMARY KEY (") || part.isEmpty()) {
+                continue;
+            }
+
+            java.util.regex.Pattern columnPattern = java.util.regex.Pattern.compile("^(\\w+)\\s+([A-Za-z0-9()]+)(.*)$");
+            java.util.regex.Matcher colMatcher = columnPattern.matcher(part);
+    
+            if (colMatcher.find()) {
+                String colName = colMatcher.group(1);
+                String rawType = colMatcher.group(2).trim(); // 此时 rawType 应该是 "BIGINT"
+                String colOptions = colMatcher.group(3).trim(); // 此时 colOptions 应该是 "PRIMARY KEY NOT NULL"
+    
+                // 特殊处理: 如果类型后面紧跟 UNSIGNED (MySQL特有)，将其合并到类型中
+                String colType = rawType;
+                if (colOptions.toUpperCase().startsWith("UNSIGNED")) {
+                    colType += " UNSIGNED";
+                    colOptions = colOptions.substring("UNSIGNED".length()).trim();
+                }
+    
+                // 构建列的属性
+                Map<String, Object> columnOptions = new HashMap<>();
+                List<MySQLColumn.ColumnOptions> optionsList = new ArrayList<>();
+    
+                // 解析约束 (检查 colOptions 字符串)
+                String upperOptions = colOptions.toUpperCase();
+                
+                if (upperOptions.contains("NOT NULL")) {
+                    optionsList.add(MySQLColumn.ColumnOptions.NOT_NULL);
+                } else if (upperOptions.contains("NULL")) {
+                    optionsList.add(MySQLColumn.ColumnOptions.NULL);
+                }
+    
+                if (upperOptions.contains("UNIQUE")) {
+                    optionsList.add(upperOptions.contains("KEY") ? 
+                        MySQLColumn.ColumnOptions.UNIQUE_KEY : 
+                        MySQLColumn.ColumnOptions.UNIQUE);
+                }
+    
+                boolean isPrimaryKey = upperOptions.contains("PRIMARY KEY");
+                if (isPrimaryKey) {
+                    optionsList.add(MySQLColumn.ColumnOptions.PRIMARY_KEY);
+                }
+    
+                // 确定数据类型 (现在传进去的 colType 不会包含 PRIMARY KEY 等杂质)
+                MySQLDataType dataType = mapToMySQLDataType(colType);
+    
+                // 构建 Options 映射
+                columnOptions.put("isPrimaryKey", isPrimaryKey);
+                columnOptions.put("ColumnOptions", optionsList);
+                columnOptions.put("trueType", colType);
+                columnOptions.put("isUnsigned", colType.toUpperCase().contains("UNSIGNED"));
+                columnOptions.put("isForeignKey", false);
+    
+                // 创建并添加列
+                MySQLColumn column = new MySQLColumn(colName, dataType, columnOptions, 4);
+                columns.add(column);
+    
+                if (isPrimaryKey) {
+                    this.primaryKey = column;
+                }
+            }
+        }
+    
+        // 设置表的列
+        this.setColumns(columns);
+    
+        // 创建MySQLTable对象并关联
+        sqlTable = new MySQLTable(tableName, columns, null, null);
+        for (MySQLColumn column : columns) {
+            column.setTable(sqlTable);
+        }
+    }
+
+    public MySQLDataType mapToMySQLDataType(String typeStr) {
+        typeStr = typeStr.toUpperCase().replace(" UNSIGNED", "").split("\\(")[0];
+        
+        switch (typeStr) {
+            case "INT":
+            case "BIGINT":
+                return MySQLDataType.INT;
+            case "DECIMAL":
+                return MySQLDataType.DECIMAL;
+            case "VARCHAR":
+            case "TEXT":
+                return MySQLDataType.VARCHAR;
+            case "FLOAT":
+                return MySQLDataType.FLOAT;
+            case "DOUBLE":
+                return MySQLDataType.DOUBLE;
+            case "BOOLEAN":
+                return MySQLDataType.BOOLEAN;
+            default:
+                throw new IllegalArgumentException("不支持的数据类型: " + typeStr);
+        }
+    }
+
+>>>>>>> e2d898d (添加APTrans核心代码)
     public boolean isSetUniqueKey() {
         return setPrimaryKey || setUniqueKey;
     }
@@ -61,7 +189,10 @@ public class TxnTable {
         return createSql;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2d898d (添加APTrans核心代码)
     public MySQLColumn getPrimaryKey() {
         return primaryKey;
     }
